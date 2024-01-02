@@ -2,13 +2,11 @@
 
 # Argumento definido em docker-compose.yml
 ARG PHP_IMG_VERSION
+ARG user
+ARG uid
 
 # Set master image
 FROM ${PHP_IMG_VERSION}
-
-# Argumentos definidos em docker-compose.yml
-ARG user
-ARG uid
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -23,8 +21,7 @@ RUN apt-get update && apt-get install -y \
     libldap2-dev \
     libxml2-dev \
     libmagickwand-dev --no-install-recommends \
-    && pecl install imagick \
-    xdebug
+    && pecl install imagick xdebug
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
